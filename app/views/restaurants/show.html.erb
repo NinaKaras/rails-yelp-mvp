@@ -1,0 +1,35 @@
+<div class="container">
+
+<h1><%= @restaurant.name%></h1>
+
+<p>A nice <strong><%= @restaurant.category %></strong> restaurant.</p>
+<p>Interested? Check it out at <strong><%= @restaurant.address %></strong>.</p>
+  <% unless @restaurant.phone_number == nil %>
+  <p> Want to make a reservation? Call <strong> <%= @restaurant.phone_number %></strong>. </p>
+  <% else %>
+  <p>No phone number.</p>
+  <% end %>
+
+<br>
+
+<h4>Reviews</h4>
+<p>Read what other people think of <%= @restaurant.name %>.</p>
+<ul>
+  <% @restaurant.reviews.each do |review| %>
+    <li><%= review.content %> <%= review.rating %> </li>
+    <% end %>
+</ul>
+
+<br>
+<h4>Your review</h4>
+<p>Tell other people what you think of <%= @restaurant.name %></p>
+
+  <%= simple_form_for([@restaurant, @review]) do |r| %>
+  <%=  r.input :content %>
+  <%=  r.input :rating %>
+  <%=  r.submit "Submit review", class: "btn btn-primary" %>
+  <% end %>
+
+
+
+</div>
